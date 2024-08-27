@@ -1,6 +1,6 @@
 import "./App.css";
-import Wrapper from "./components /Wrapper";
+import AppRouter from "./routes/AppRouter";
 
-const App = () => <Wrapper />;
+const App = () => <AppRouter />;
 
 export default App;

@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getApplications } from "./TableThunk";
+import { getProducts, getProduct } from "./TableThunk";
+import { Product } from "../../types";
 
 interface tableState {
   applications: any[];
+  product: Product;
   isLoading: boolean;
 }
 
 const initialState: tableState = {
   applications: [],
+  product: {},
   isLoading: false,
 };
 
@@ -17,16 +20,29 @@ export const tableReduser = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getApplications.fulfilled, (state, { payload }) => {
+      .addCase(getProducts.fulfilled, (state, { payload }) => {
         state.applications = payload;
         state.isLoading = false;
       })
 
-      .addCase(getApplications.pending, (state) => {
+      .addCase(getProducts.pending, (state) => {
         state.isLoading = true;
       })
 
-      .addCase(getApplications.rejected, (state) => {
+      .addCase(getProducts.rejected, (state) => {
+        state.isLoading = false;
+      })
+
+      .addCase(getProduct.fulfilled, (state, { payload }) => {
+        state.product = payload;
+        state.isLoading = false;
+      })
+
+      .addCase(getProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+
+      .addCase(getProduct.rejected, (state) => {
         state.isLoading = false;
       });
   },
