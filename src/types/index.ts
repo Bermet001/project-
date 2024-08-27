@@ -10,4 +10,10 @@ interface Product {
   avatar?: string;
 }
 
-export type { Product };
+interface productState {
+  products: any[];
+  product: Product;
+  isLoading: boolean;
+}
+
+export type { Product, productState };

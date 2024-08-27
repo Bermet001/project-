@@ -1,27 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProducts, getProduct } from "./TableThunk";
-import { Product } from "../../types";
+import { getProducts, getProduct } from "./productThunk";
+import { productState } from "../../types";
 
-interface tableState {
-  applications: any[];
-  product: Product;
-  isLoading: boolean;
-}
-
-const initialState: tableState = {
-  applications: [],
+const initialState: productState = {
+  products: [],
   product: {},
   isLoading: false,
 };
 
 export const tableReduser = createSlice({
-  name: "table",
+  name: "products",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getProducts.fulfilled, (state, { payload }) => {
-        state.applications = payload;
+        state.products = payload;
         state.isLoading = false;
       })
 

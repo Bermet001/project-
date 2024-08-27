@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { tableReduser } from "./slices/Table";
+import { tableReduser } from "./slices/productSlice";
 
 const rootReducer = combineReducers({
   [tableReduser.name]: tableReduser.reducer,
@@ -8,10 +8,6 @@ const rootReducer = combineReducers({
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
 });
 
 export const useAppDispatch = () => useDispatch<typeof store.dispatch>();

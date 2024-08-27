@@ -1,16 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Wrapper from "../components /Wrapper";
+import Wrapper from "../pages/Wrapper";
 import Detailinfo from "../pages/DetailInfo";
 
 const AppRouter = () => {
   const router = createBrowserRouter([
     {
-      path: "table",
+      path: "/",
       element: <Wrapper />,
     },
 
     {
-      path: "table/:id",
+      path: "/product/:id",
       element: <Detailinfo />,
     },
   ]);

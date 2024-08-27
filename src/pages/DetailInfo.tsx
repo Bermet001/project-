@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/store";
-import { getProduct } from "../store/slices/TableThunk";
+import { getProduct } from "../store/slices/productThunk";
 import {
   Row,
   Col,
@@ -20,17 +20,19 @@ import {
 
 const Detailinfo = () => {
   const { id } = useParams();
-  const { product, isLoading } = useAppSelector((state) => state.table);
+  const { product, isLoading } = useAppSelector((state) => state.products);
+
   const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
+
+  console.log(product);
 
   useEffect(() => {
     dispatch(getProduct(id));
   }, [id]);
 
-  if (isLoading) {
-    return <Skeleton active style={{ padding: "2rem" }} />;
-  }
+  if (isLoading) <Skeleton active style={{ padding: "2rem" }} />;
 
   const handleGoBack = () => navigate(-1);
 
