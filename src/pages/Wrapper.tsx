@@ -23,16 +23,12 @@ const Wrapper = () => {
 
   const handleFilterChange = (value: string) => {
     setFilterOption(value);
-    console.log();
-
     handleSearch(value);
   };
 
   let sortedData = [
     ...new Map(products.map((item) => [item.category, item])).values(),
   ].sort((a, b) => a.category.localeCompare(b.category));
-
-  console.log(sortedData);
 
   const handleSearch = (filterOption: string) => {
     if (filterOption === "option2") {
@@ -60,20 +56,24 @@ const Wrapper = () => {
   const columns = useMemo(() => getColumns(), []);
 
   return (
-    <Space direction="vertical" style={{ width: "100%" }}>
-      <Row>
-        <Col>
+    <Space
+      direction="vertical"
+      style={{ width: "100%", marginTop: "1rem", marginBottom: "1rem" }}
+    >
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={16}>
           <Input
+            style={{ width: "100%" }}
             onChange={searchChange}
             value={searchText}
             addonAfter={<SearchOutlined />}
             placeholder="Search"
           />
         </Col>
-
-        <Col>
+        <Col xs={24} sm={8}>
           <Select
             showSearch
+            style={{ width: "100%" }}
             placeholder="Select category"
             value={filterOption}
             onChange={handleFilterChange}
