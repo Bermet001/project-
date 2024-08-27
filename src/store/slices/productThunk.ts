@@ -17,16 +17,25 @@ const getProducts = createAsyncThunk(
   }
 );
 
-const getProduct = createAsyncThunk(
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+}
+interface GetProductThunkAPI {
+  rejectValue: string;
+}
+
+const getProduct = createAsyncThunk<Product, any, GetProductThunkAPI>(
   "product/getProduct",
 
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${BASE_URL}/items/${id}`);
+      const { data } = await axios.get<Product>(`${BASE_URL}/items/${id}`);
 
-      return response.data;
+      return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue((error as Error).message);
     }
   }
 );

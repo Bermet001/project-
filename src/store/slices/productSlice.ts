@@ -1,5 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getProducts, getProduct, searchProduct } from "./productThunk";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  getProducts,
+  getProduct,
+  searchProduct,
+  Product,
+} from "./productThunk";
 import { productState } from "../../types";
 
 const initialState: productState = {
@@ -29,10 +34,13 @@ export const productReduser = createSlice({
         state.isLoading = false;
       })
 
-      .addCase(getProduct.fulfilled, (state, { payload }) => {
-        state.product = payload;
-        state.isLoading = false;
-      })
+      .addCase(
+        getProduct.fulfilled,
+        (state, { payload }: PayloadAction<Product>) => {
+          state.product = payload;
+          state.isLoading = false;
+        }
+      )
 
       .addCase(getProduct.pending, (state) => {
         state.isLoading = true;
