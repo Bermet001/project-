@@ -1,9 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { tableReduser } from "./slices/productSlice";
+import { productReduser } from "./slices/productSlice";
 
 const rootReducer = combineReducers({
-  [tableReduser.name]: tableReduser.reducer,
+  [productReduser.name]: productReduser.reducer,
 });
 
 const store = configureStore({

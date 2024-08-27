@@ -23,11 +23,18 @@ const Wrapper = () => {
 
   const handleFilterChange = (value: string) => {
     setFilterOption(value);
+    console.log();
+
     handleSearch(value);
   };
 
+  let sortedData = [
+    ...new Map(products.map((item) => [item.category, item])).values(),
+  ].sort((a, b) => a.category.localeCompare(b.category));
+
+  console.log(sortedData);
+
   const handleSearch = (filterOption: string) => {
-    let sortedData = [...products];
     if (filterOption === "option2") {
       sortedData = sortedData.sort(
         (a, b) =>
@@ -44,10 +51,10 @@ const Wrapper = () => {
 
   useEffect(() => {
     dispatch(searchProduct(searchText));
-  }, [searchText, dispatch]);
+  }, [searchText]);
 
   useEffect(() => {
-    setFilteredData(products);
+    setFilteredData(sortedData);
   }, [products]);
 
   const columns = useMemo(() => getColumns(), []);
@@ -63,6 +70,7 @@ const Wrapper = () => {
             placeholder="Search"
           />
         </Col>
+
         <Col>
           <Select
             showSearch

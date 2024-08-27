@@ -26,8 +26,6 @@ const Detailinfo = () => {
 
   const navigate = useNavigate();
 
-  console.log(product);
-
   useEffect(() => {
     dispatch(getProduct(id));
   }, [id]);

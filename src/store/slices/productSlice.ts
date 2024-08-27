@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProducts, getProduct } from "./productThunk";
+import { getProducts, getProduct, searchProduct } from "./productThunk";
 import { productState } from "../../types";
 
 const initialState: productState = {
@@ -8,10 +8,12 @@ const initialState: productState = {
   isLoading: false,
 };
 
-export const tableReduser = createSlice({
+export const productReduser = createSlice({
   name: "products",
   initialState,
+
   reducers: {},
+
   extraReducers: (builder) => {
     builder
       .addCase(getProducts.fulfilled, (state, { payload }) => {
@@ -37,6 +39,20 @@ export const tableReduser = createSlice({
       })
 
       .addCase(getProduct.rejected, (state) => {
+        state.isLoading = false;
+      })
+
+      .addCase(searchProduct.fulfilled, (state, { payload }) => {
+        state.products = payload;
+
+        state.isLoading = false;
+      })
+
+      .addCase(searchProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+
+      .addCase(searchProduct.rejected, (state) => {
         state.isLoading = false;
       });
   },
